@@ -35,6 +35,7 @@ class Unet(EncoderDecoder):
             classes=1,
             activation='sigmoid',
             center=False,  # usefull for VGG models
+            use_ConvTranspose2d=False, # if true, use ConvTranspose2d, else use interpolate
     ):
         encoder = get_encoder(
             encoder_name,
@@ -47,6 +48,7 @@ class Unet(EncoderDecoder):
             final_channels=classes,
             use_batchnorm=decoder_use_batchnorm,
             center=center,
+            use_ConvTranspose2d=use_ConvTranspose2d
         )
 
         super().__init__(encoder, decoder, activation)
